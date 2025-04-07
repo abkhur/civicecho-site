@@ -26,3 +26,4 @@ dist-ssr
 # Output of build tools (frontend)
 dist/
 .vite/
+.next/
