@@ -1,0 +1,35 @@
+/* app/globals.css */
+
+@tailwind utilities;
+
+/* You don’t need @tailwind base or @tailwind components in Tailwind v4 unless you explicitly want to extend them.
+   Utilities is usually enough for most projects. */
+
+/* Base Typography & Layout Styles */
+body {
+  @apply bg-white text-gray-900 antialiased leading-relaxed;
+}
+
+main {
+  @apply max-w-2xl mx-auto p-6;
+}
+
+input,
+textarea,
+select {
+  @apply w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+button {
+  @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition;
+}
+
+/* Optional spacing helpers */
+section {
+  @apply my-8;
+}
+
+/* Optional card-style container */
+.card {
+  @apply p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm;
+}

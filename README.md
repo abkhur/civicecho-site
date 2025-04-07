@@ -19,7 +19,7 @@ This is the React-based frontend for [CivicEcho](https://github.com/abkhur/civic
 ### Installation
 
 ```bash
-git clone https://github.com/yourname/civicecho-frontend.git
+git clone https://github.com/abkhur/civicecho-frontend.git
 cd civicecho-frontend
 yarn install
 ```
@@ -30,7 +30,7 @@ yarn install
 yarn dev
 ```
 
-Your app will be running at `http://localhost:5173` (if using Vite).
+Your app will be running at `http://localhost:5173`.
 
 ### Build for Production
 
@@ -50,10 +50,13 @@ yarn preview
 
 ```
 src/
-├── App.jsx             # Main app component
+├── app/                # Pages and layout
+│   └── page.tsx        # Main page for generating emails
 ├── components/         # Reusable UI components
+│   └── EmailForm.tsx   # The form for generating the email
 ├── assets/             # Icons, images, etc.
 ├── styles/             # Global CSS / Tailwind
+│   └── globals.css     # Global styles including Tailwind
 └── ...
 ```
 
@@ -64,7 +67,7 @@ src/
 You’ll need to set up an environment file `.env` with:
 
 ```
-VITE_API_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 ```
 
 > Change this to your backend URL in production.
@@ -73,7 +76,7 @@ VITE_API_BASE_URL=http://localhost:3000
 
 ## 🧩 Features (So Far)
 
-- 🎯 Location-aware bill targeting (VA, MD, NC, CA beta support)
+- 🎯 Location-aware bill targeting
 - ✍️ GPT-generated email drafts with your stance & context
 - 📬 Option to send emails directly to reps (in progress)
 - 🔒 Zero tracking, zero cookies, zero shady business
@@ -83,8 +86,8 @@ VITE_API_BASE_URL=http://localhost:3000
 ## 💡 Tech Stack
 
 - **React** (w/ hooks)
-- **Vite** (blazing fast build tool)
-- **Tailwind CSS** (optional but likely)
+- **Next.js** (server-side rendering, API routes)
+- **Tailwind CSS** (for styling)
 - **Axios** for HTTP requests
 
 ---
