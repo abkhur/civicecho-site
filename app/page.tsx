@@ -1,25 +1,26 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react/react-in-jsx-scope */
 import EmailForm from '../components/EmailForm';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-50">
-      <div className="max-w-2xl mx-auto py-16 px-6">
+    <main className="bg-white dark:bg-gray-900 dark:text-gray-200">
+      <div className="max-w-2xl mx-auto py-16 px-6 ">
         <header className="mb-12 text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight mb-4">
             CivicEcho
           </h1>
-          <p className="text-gray-600 text-lg">
-            Write persuasive emails to your representatives — powered by people, not profit.
+          <p className="text-gray-600 dark:text-gray-300 text-lg">
+            Write persuasive emails to your representatives — powered by AI, and you!
           </p>
         </header>
 
-        <section className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+        <section className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border border-gray-200 dark:border-gray-600">
           <EmailForm />
         </section>
 
-        <footer className="mt-12 text-center text-sm text-gray-400">
-          Made with love and care by the CivicEcho project.
+        <footer className="mt-12 text-center text-sm text-gray-400 dark:text-gray-500">
+          Made with love and care by <a href="https://github.com/abkhur/CivicEcho" target="_blank">the CivicEcho project.</a>
         </footer>
       </div>
     </main>
