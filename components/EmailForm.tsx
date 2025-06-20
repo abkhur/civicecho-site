@@ -342,28 +342,36 @@ export default function EmailForm({
   return (
     <div className="max-w-lg mx-auto mt-8 p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
       {/* Progress bar */}
-      <div className="flex items-center mb-6">
-        {ALL_STEPS.map((label, i) => {
-          // hide the Type & Details markers when prefilled
-          if (isPrefilled && (label === 'Type' || label === 'Details')) {
-            return null;
-          }
-          const idx = ALL_STEPS.indexOf(label);
-          const isActive = idx === step;
-          const reached = idx <= step;
-          return (
-            <div key={label} className="relative flex-1">
-              <div
-                className={`h-1 rounded ${reached ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-700'
+      <div className="relative mb-6">
+        {/* Background track */}
+        <div className="h-1 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+
+        {/* Filled portion */}
+        <div
+          className="h-1 bg-blue-600 rounded-full absolute top-0 left-0"
+          style={{
+            width: `${(step / (ALL_STEPS.length - 1)) * 100}%`,
+          }}
+        />
+
+        {/* Step bullets */}
+        <div className="absolute inset-0 flex justify-between items-center px-0">
+          {ALL_STEPS.map((_, idx) => (
+            <div
+              key={idx}
+              className="w-4 h-4 rounded-full flex items-center justify-center bg-transparent"
+            >
+              <span
+                className={`block w-2 h-2 rounded-full transition-colors ${idx <= step
+                  ? 'bg-blue-600'
+                  : 'bg-gray-300 dark:bg-gray-700'
                   }`}
               />
-              {idx < ALL_STEPS.length - 1 && (
-                <div className="absolute right-0 top-[-6px] w-4 h-4 rounded-full bg-white border border-gray-300 dark:border-gray-600" />
-              )}
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
+
 
       <form
         onSubmit={e => {
