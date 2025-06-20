@@ -23,7 +23,7 @@ export default function CampaignDetail() {
 
     useEffect(() => {
         if (!slug) return;
-        fetch(`http://localhost:3000/campaigns/${slug}`)
+        fetch(`https://civicecho.org/campaigns/${slug}`)
             .then(async res => {
                 if (!res.ok) {
                     throw new Error((await res.json()).error || 'Failed to fetch campaign');

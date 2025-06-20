@@ -1,6 +1,7 @@
-/* eslint-disable react/react-in-jsx-scope */
+
 'use client';
 
+import React from 'react';
 import './globals.css';
 import { useEffect, useState } from 'react';
 import { metadata } from './metadata';

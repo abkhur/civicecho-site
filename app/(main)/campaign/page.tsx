@@ -14,7 +14,7 @@ export default function CampaignList() {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/campaigns')
+        fetch('https://civicecho.org/campaigns')
             .then(res => res.json())
             .then(setCampaigns);
     }, []);

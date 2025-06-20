@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 // app/about/page.tsx
-/* eslint-disable react/react-in-jsx-scope */
+
 import React from 'react';
 
 const aboutSections = [

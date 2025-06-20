@@ -17,7 +17,7 @@ export default function NewCampaign() {
         e.preventDefault();
         setError(null);
 
-        const res = await fetch('http://localhost:3000/campaigns', {
+        const res = await fetch('https://civicecho.org/campaigns', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title, description, issueTopic, issueSummary, createdBy }),

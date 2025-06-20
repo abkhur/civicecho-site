@@ -1,5 +1,5 @@
 // app/ethos/page.tsx
-/* eslint-disable react/react-in-jsx-scope */
+
 import React from 'react';
 
 const sections = [

@@ -79,7 +79,7 @@ export default function EmailForm({
 
   // fetch trending issues
   useEffect(() => {
-    fetch('http://localhost:3000/trending-issues')
+    fetch('https://civicecho.org/trending-issues')
       .then(r => r.json())
       .then(data => setTrending(data.issues || []))
       .catch(() => setTrending([]));
@@ -122,7 +122,7 @@ export default function EmailForm({
     if (!customUrl) return;
     setUrlLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/extract-article', {
+      const res = await fetch('https://civicecho.org/extract-article', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: customUrl }),
@@ -144,7 +144,7 @@ export default function EmailForm({
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/generate-email', {
+      const res = await fetch('https://civicecho.org/generate-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -152,7 +152,7 @@ export default function EmailForm({
       const { emailContent } = await res.json();
       setEmailOutput(emailContent || 'Something went wrong.');
 
-      const cRes = await fetch('http://localhost:3000/get-contact-page', {
+      const cRes = await fetch('https://civicecho.org/get-contact-page', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -292,6 +292,7 @@ export default function EmailForm({
                 className="input"
                 required
                 onChange={handleChange}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 value={(formData as any)[field] || ''}
               />
             ))}
