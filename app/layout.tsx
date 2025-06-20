@@ -1,37 +1,33 @@
 /* eslint-disable react/react-in-jsx-scope */
-'use client'; // Mark this as a client component
+'use client';
 
 import './globals.css';
 import { useEffect, useState } from 'react';
 import { metadata } from './metadata';
+import Header from '../components/Header';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Set initial dark mode based on user's preference stored in localStorage or default to light
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(prev => {
       const newDarkMode = !prev;
-      localStorage.setItem('dark-mode', String(newDarkMode)); // Save user preference
+      localStorage.setItem('dark-mode', String(newDarkMode));
       return newDarkMode;
     });
   };
 
-  // Apply dark mode class to the body element only on the client-side
   useEffect(() => {
-    // Check localStorage only after the component is mounted
     const storedDarkMode = localStorage.getItem('dark-mode');
     if (storedDarkMode) {
       setIsDarkMode(storedDarkMode === 'true');
     }
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+  }, []);
 
-  // Apply dark mode class to the body element
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark');
@@ -49,13 +45,12 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;700&display=swap"
         />
-        {/* Set metadata */}
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <link rel="icon" href={metadata.icons.icon} />
       </head>
       <body className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans">
-        <div className="fixed top-4 right-4 z-50">
+        <div className="fixed bottom-4 right-4 z-50">
           <button
             onClick={toggleDarkMode}
             className="p-2 rounded-full bg-gray-300 dark:bg-gray-700"
@@ -63,7 +58,10 @@ export default function RootLayout({
             {isDarkMode ? '🌙' : '☀️'}
           </button>
         </div>
-        {children}
+        <Header />
+        <main className="max-w-4xl mx-auto p-4">
+          {children}
+        </main>
       </body>
     </html>
   );

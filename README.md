@@ -1,20 +1,25 @@
-# CivicEcho Frontend
 
-This is the React-based frontend for [CivicEcho](https://github.com/abkhur/civicecho) — a people-first tool for automating advocacy to congressional representatives.
+# CivicEcho – Frontend
+
+This is the frontend for [**CivicEcho**](https://github.com/abkhur/civicecho-backend), a tool for sending persuasive, AI-generated emails to your congressional representatives. Built with Next.js and Tailwind, this is the public face of the platform — clean, fast, and people-first.
+
+---
 
 ## 🧠 Project Goals
 
-- Generate professional, persuasive emails based on user input
-- Educate users on the civic process in plain English
+- Help regular people contact their representatives — no political knowledge required
+- Generate professional, personalized emails with GPT based on real legislation
+- Keep everything transparent, open source, and free to use
 - Never collect or sell user data — ever
-- Always open source, always transparent
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+##  Getting Started
 
-- Node.js (v18 or later recommended)
-- Yarn (preferred) or npm
+### Requirements
+
+- Node.js (v18+)
+- Yarn (recommended)
 
 ### Installation
 
@@ -24,85 +29,77 @@ cd civicecho-frontend
 yarn install
 ```
 
-### Run in Development
+### Development
 
 ```bash
 yarn dev
 ```
 
-Your app will be running at `http://localhost:5173`.
+App runs at:
+http://localhost:3001 (or whatever port you set)
 
-### Build for Production
+### Production Build
 
 ```bash
 yarn build
+yarn start
 ```
 
-### Preview Production Build Locally
+### Optional: Preview Production Build
 
 ```bash
 yarn preview
 ```
 
----
+### Environment Variables
 
-## 🗃️ Folder Structure
+Create a .env.local file:
 
-```
-src/
-├── app/                # Pages and layout
-│   └── page.tsx        # Main page for generating emails
-├── components/         # Reusable UI components
-│   └── EmailForm.tsx   # The form for generating the email
-├── assets/             # Icons, images, etc.
-├── styles/             # Global CSS / Tailwind
-│   └── globals.css     # Global styles including Tailwind
-└── ...
-```
-
----
-
-## 🌐 Environment Variables
-
-You’ll need to set up an environment file `.env` with:
-
-```
+```bash
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 ```
+Replace with your production backend URL when deploying.
+This is used to hit endpoints like /generate-email.
 
-> Change this to your backend URL in production.
+##  Key Features
 
----
+- 📍 Location-aware bill targeting using address → district mapping
 
-## 🧩 Features (So Far)
+- ✍️ AI-generated email drafts that adapt to your stance + context
 
-- 🎯 Location-aware bill targeting
-- ✍️ GPT-generated email drafts with your stance & context
-- 📬 Option to send emails directly to reps (in progress)
-- 🔒 Zero tracking, zero cookies, zero shady business
+- 💬 Campaign sharing and trend integration (in progress)
 
----
+- 🔐 No tracking, no analytics, no cookies — period
 
-## 💡 Tech Stack
+## 🧪 Stack
 
-- **React** (w/ hooks)
-- **Next.js** (server-side rendering, API routes)
-- **Tailwind CSS** (for styling)
-- **Axios** for HTTP requests
+   - Next.js – App router, server-side rendering
 
----
+    - Tailwind CSS – Styling
+
+    - React (w/ hooks) – UI logic
+
+    - Axios – HTTP requests
+
+    - TypeScript – Strictly typed frontend logic
 
 ## 🤝 Contributing
 
-CivicEcho is a project by the people, for the people. If you have ideas or want to help out:
-
-- Fork the repo
-- Open an issue or pull request
-- Or just email us directly
-
----
+This is a solo project for now, but I'm open to help from people who care.
+File an issue, fork it, or [email me.](mailto:abkhur@civicecho.org)
 
 ## 📜 License
 
-[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+GNU Affero General Public License v3.0 (AGPL-3.0)
 
+ If you fork this and host it yourself, you need to open source your changes.
+
+## Shoutouts
+
+This project runs because people believe in the mission. Thanks for supporting it — and thanks for giving a damn.
+
+Also, shoutouts to a couple people I like:
+
+- Muhammad Khurram (my awesome little brother)
+- Michael Terrando (my best friend)
+- Dylan Singh ([stream his music](https://soundcloud.com/dsiides))

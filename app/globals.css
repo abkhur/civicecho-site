@@ -1,46 +1,50 @@
-/* Tailwind's utility classes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global styles for light mode */
+/* Global light-mode body */
 body {
   @apply bg-white text-gray-900 antialiased leading-relaxed;
   font-family: 'Inter', sans-serif;
 }
 
-/* Dark mode styles */
+/* Dark-mode body */
 body.dark {
-  @apply bg-gray-900 text-white; /* Dark mode body background and text color */
+  @apply bg-gray-900 text-white;
 }
 
+/* Container */
 main {
   @apply max-w-2xl mx-auto p-6;
 }
 
-/* Dark mode form styling */
+/* Form inputs */
 input,
 textarea,
 select {
   @apply w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400;
 }
 
-/* Dark mode button */
-button {
-  @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition dark:bg-blue-500 dark:hover:bg-blue-600;
+/* Default button (primary) */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition;
 }
 
-/* Optional spacing helpers */
+/* Dark-mode primary */
+body.dark .btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600;
+}
+
+/* Secondary / Text Button */
+.btn-secondary {
+  @apply bg-transparent text-gray-800 dark:text-white font-medium py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition;
+}
+
+/* Optional utilities */
 section {
   @apply my-8;
 }
 
-/* Optional card-style container */
 .card {
-  @apply p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700; /* Dark mode card styling */
-}
-
-/* Dark mode toggle styles */
-body.dark button {
-  @apply bg-blue-600 text-white;
+  @apply p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700;
 }
