@@ -39,7 +39,7 @@ export default function NewCampaign() {
 
         const camp = await res.json();
         // Navigate to the new campaign page
-        router.push(`/campaigns/${camp.slug}`);
+        router.push(`/campaign/${camp.slug}`);
     };
 
     return (
