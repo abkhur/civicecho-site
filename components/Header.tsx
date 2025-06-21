@@ -105,11 +105,13 @@ export default function Header() {
                                                 Socials and Email
                                             </Link>
                                         </li>
+                                        {/*
                                         <li>
                                             <Link href="https://discord.gg/your" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                 Discord
                                             </Link>
                                         </li>
+                                        */}
                                     </ul>
                                     <div className="py-1">
                                         <Link href="/donate" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">

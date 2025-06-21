@@ -35,6 +35,7 @@ export default function ContactPage() {
                     label="Abuse Reports"
                     email="abuse@civicecho.org"
                 />
+                {/*
                 <li className="flex items-center space-x-3">
                     <Users className="w-5 h-5 text-blue-500 flex-shrink-0" />
                     <span>
@@ -49,6 +50,7 @@ export default function ContactPage() {
                         </a>
                     </span>
                 </li>
+                */}
             </ul>
         </div>
     );

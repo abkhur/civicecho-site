@@ -117,7 +117,7 @@ const faqSections = [
     {
         question: 'How can I contribute or file bugs?',
         answer:
-            'Head over to our GitHub issues page or drop a note in Discord. We read everything and appreciate every PR.',
+            'Head over to our GitHub issues page or shoot us an email. We read everything and appreciate every PR.',
     },
 ];
 
