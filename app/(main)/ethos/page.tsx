@@ -26,6 +26,7 @@ const sections = [
         title: 'Who CivicEcho Is For',
         content: (
             <>
+                <p>This is for you.</p>
                 {[
                     'the teacher in Queens, stretching her paycheck between rent and school supplies.',
                     'the farmer outside Lexington, praying the corn doesn’t burn up in the summer heat.',
@@ -41,10 +42,11 @@ const sections = [
                 ].map((line) => (
                     <p key={line}>This is for {line}</p>
                 ))}
+                <br></br>
                 <p>
-                    This is for anyone, anywhere, who’s struggling. Who feels like the powers that be don’t listen. Who didn’t go to Harvard. Who rents and doesn’t own. Whose parents don’t have a vacation home in Aspen. Who cares enough to speak but has never been heard.
+                    This is for anyone, anywhere, who’s ever felt unheard. <br></br>Who feels like the powers that be don’t listen.<br></br>Who rents and doesn’t own. <br></br>Whose parents don’t have a vacation home in Aspen. <br></br>Who cares enough to speak but has never been heard.
                 </p>
-                <p>This is for you, and this is for us. The rest of us. The ones who have to wait in line. The ones who get told they’re asking too much. The ones who don’t get a seat at the table but still pick up the tab. This is for us. This is for you.</p>
+                <p>This is for you, and this is for us. <br></br>The rest of us. <br></br>The ones who have to wait in line. <br></br>The ones who get told they’re asking too much. <br></br>The ones who don’t get a seat at the table but still pick up the tab. <br></br>This is for us. <br></br>This is for you.</p>
             </>
         ),
     },
@@ -105,23 +107,6 @@ const sections = [
                 <p>Maybe it creates some real change.</p>
                 <p>But even if it never evolves past what it is right now, it still matters.</p>
                 <p>Because it works. Because it’s yours. Because someone, somewhere, needed this. And now it exists.</p>
-            </>
-        ),
-    },
-    {
-        title: 'A Final Note',
-        content: (
-            <>
-                <p>Before we wrap this up, a quick note on boundaries:</p>
-                <ul className="list-disc list-inside space-y-1">
-                    <li>No hate. Please get some therapy.</li>
-                    <li>No spam, no QAnon, no extremist fantasies.</li>
-                    <li>No harassment, threats, or doxxing.</li>
-                    <li>No fundraising, no crypto promos, no energy drinks.</li>
-                </ul>
-                <p>Maybe, just maybe, if enough people sent them messages that weren’t deranged or violent or wrapped in conspiracy nonsense, they’d start listening. Maybe they’d even write you back. Who knows? Sky’s the limit.</p>
-                <p>This tool is meant to send your thoughts to your elected representatives about bills, policies, news stories, issues that affect you—pretty much anything, really. But if you’re trying to hijack that purpose? Don’t ruin something good.</p>
-                <p>Now, go use the tool! Just use it wisely.</p>
             </>
         ),
     },

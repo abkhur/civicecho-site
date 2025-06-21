@@ -45,7 +45,7 @@ const aboutSections = [
                     <li>I skate</li>
                     <li>On repeat: <a href="https://www.youtube.com/watch?v=ryfCwiwNTYQ" target="_blank"><em>Bjork - It&apos;s Not Up To You</em></a></li>
                     <li>Current favorite movie: <em>Children of Men</em></li>
-                    <li>Code hobbyist (lol)</li>
+                    <li><a href="https://github.com/abkhur">Code hobbyist (lol)</a></li>
                     <li>I launched CivicEcho with my first summer paycheck</li>
                 </ul>
             </>
@@ -56,8 +56,8 @@ const aboutSections = [
         content: (
             <ul className="list-disc list-inside space-y-1">
                 <li><strong>Code:</strong> <a href="https://github.com/abkhur/CivicEcho" target="_blank">We’re on GitHub—fork us, open a PR, make it yours.</a></li>
-                <li><strong>Donate:</strong> Hosting and APIs cost real money. A few bucks keeps the lights on.</li>
-                <li><strong>Spread the word:</strong> Share a link, tweet, or a Reddit post!</li>
+                <li><strong>Donate:</strong> <a href="/donate">Hosting and APIs cost real money. A few bucks keeps the lights on.</a></li>
+                <li><strong>Spread the word:</strong> Share a link, tweet, or post!</li>
             </ul>
         ),
     },
