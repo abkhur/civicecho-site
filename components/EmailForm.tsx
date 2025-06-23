@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
@@ -48,10 +49,8 @@ export default function EmailForm({
   defaultTopic = '',
   defaultSummary = '',
 }: EmailFormProps) {
-  // track whether we're in "campaign" mode
   const isPrefilled = defaultTopic !== '';
 
-  // form state
   const [formData, setFormData] = useState<FormData>({
     congress: 119,
     userName: '',
@@ -68,7 +67,6 @@ export default function EmailForm({
     userContext: '',
   });
 
-  // current step index into ALL_STEPS
   const [step, setStep] = useState<number>(0);
   const [emailOutput, setEmailOutput] = useState<string>('');
   const [contactPage, setContactPage] = useState<string>('');
@@ -76,8 +74,8 @@ export default function EmailForm({
   const [trending, setTrending] = useState<TrendingIssue[]>([]);
   const [customUrl, setCustomUrl] = useState<string>('');
   const [urlLoading, setUrlLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // fetch trending issues
   useEffect(() => {
     fetch('https://civicecho.org/trending-issues')
       .then(r => r.json())
@@ -85,7 +83,6 @@ export default function EmailForm({
       .catch(() => setTrending([]));
   }, []);
 
-  // generic change handler
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -97,27 +94,54 @@ export default function EmailForm({
           ? Number(value)
           : value,
     }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  // skip logic for next / prev
+  const validateStep = (): boolean => {
+    const errs: Record<string, string> = {};
+    switch (ALL_STEPS[step]) {
+      case 'Name':
+        if (!formData.userName.trim()) errs.userName = 'Name is required';
+        break;
+      case 'Details':
+        if (formData.billType === 'issue') {
+          if (!formData.issueTopic?.trim()) errs.issueTopic = 'Topic is required';
+          if (!formData.issueSummary?.trim()) errs.issueSummary = 'Summary is required';
+        } else {
+          if (!formData.billNumber || formData.billNumber <= 0) errs.billNumber = 'Valid bill number is required';
+        }
+        break;
+      case 'Address':
+        ['street', 'city', 'state', 'zipCode'].forEach(field => {
+          const val = (formData as any)[field]?.toString().trim();
+          if (!val) errs[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+        });
+        if (formData.zipCode && !/^\d{5}$/.test(formData.zipCode)) errs.zipCode = 'ZIP code must be 5 digits';
+        break;
+      default:
+        break;
+    }
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
   const nextStep = () => {
+    if (!validateStep()) return;
     if (isPrefilled && step === 0) {
-      // after Name, jump to Stance (index 3)
       setStep(3);
     } else {
       setStep(s => Math.min(s + 1, ALL_STEPS.length - 1));
     }
   };
+
   const prevStep = () => {
     if (isPrefilled && step === 3) {
-      // back from Stance to Name
       setStep(0);
     } else {
       setStep(s => Math.max(s - 1, 0));
     }
   };
 
-  // fetch article by URL
   const handleFetchUrl = async () => {
     if (!customUrl) return;
     setUrlLoading(true);
@@ -133,14 +157,10 @@ export default function EmailForm({
         issueTopic: title,
         issueSummary: summary,
       }));
-    } catch {
-      // no-op
-    } finally {
-      setUrlLoading(false);
-    }
+    } catch { /* empty */ }
+    finally { setUrlLoading(false); }
   };
 
-  // final submit
   const handleSubmit = async () => {
     setLoading(true);
     try {
@@ -171,19 +191,20 @@ export default function EmailForm({
     }
   };
 
-  // render UI for each step
   const renderStep = () => {
     switch (ALL_STEPS[step]) {
       case 'Name':
         return (
-          <input
-            name="userName"
-            value={formData.userName}
-            onChange={handleChange}
-            placeholder="Your Name"
-            className="input"
-            required
-          />
+          <div>
+            <input
+              name="userName"
+              value={formData.userName}
+              onChange={handleChange}
+              placeholder="Your Name"
+              className="input"
+            />
+            {errors.userName && <p className="text-red-500 text-sm mt-1">{errors.userName}</p>}
+          </div>
         );
 
       case 'Type':
@@ -250,21 +271,33 @@ export default function EmailForm({
                 onChange={handleChange}
                 placeholder="Or type your own issue..."
                 className="input"
-                required
               />
+              {errors.issueTopic && <p className="text-red-500 text-sm mt-1">{errors.issueTopic}</p>}
+
+              <textarea
+                name="issueSummary"
+                value={formData.issueSummary || ''}
+                onChange={handleChange}
+                placeholder="Issue Summary"
+                className="input"
+                rows={3}
+              />
+              {errors.issueSummary && <p className="text-red-500 text-sm mt-1">{errors.issueSummary}</p>}
             </div>
           );
         } else {
           return (
-            <input
-              type="number"
-              name="billNumber"
-              value={formData.billNumber ?? ''}
-              onChange={handleChange}
-              placeholder="Bill Number (e.g., 123)"
-              className="input"
-              required
-            />
+            <div>
+              <input
+                type="number"
+                name="billNumber"
+                value={formData.billNumber ?? ''}
+                onChange={handleChange}
+                placeholder="Bill Number (e.g., 123)"
+                className="input"
+              />
+              {errors.billNumber && <p className="text-red-500 text-sm mt-1">{errors.billNumber}</p>}
+            </div>
           );
         }
 
@@ -285,16 +318,16 @@ export default function EmailForm({
         return (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {['street', 'city', 'state', 'zipCode'].map(field => (
-              <input
-                key={field}
-                name={field}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                className="input"
-                required
-                onChange={handleChange}
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                value={(formData as any)[field] || ''}
-              />
+              <div key={field}>
+                <input
+                  name={field}
+                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                  className="input"
+                  onChange={handleChange}
+                  value={(formData as any)[field] || ''}
+                />
+                {errors[field] && <p className="text-red-500 text-sm mt-1">{errors[field]}</p>}
+              </div>
             ))}
           </div>
         );
@@ -319,7 +352,7 @@ export default function EmailForm({
                 <strong>Name:</strong> {formData.userName}
               </li>
               <li>
-                <strong>Topic:</strong> {formData.issueTopic}
+                <strong>Topic:</strong> {formData.billType === 'issue' ? formData.issueTopic : `H.R. ${formData.billNumber}`}
               </li>
               <li>
                 <strong>Stance:</strong> {formData.userStance}
@@ -336,25 +369,20 @@ export default function EmailForm({
             </ul>
           </div>
         );
+
+      default:
+        return null;
     }
   };
 
   return (
     <div className="max-w-lg mx-auto mt-8 p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
-      {/* Progress bar */}
       <div className="relative mb-6">
-        {/* Background track */}
         <div className="h-1 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
-
-        {/* Filled portion */}
         <div
           className="h-1 bg-blue-600 rounded-full absolute top-0 left-0"
-          style={{
-            width: `${(step / (ALL_STEPS.length - 1)) * 100}%`,
-          }}
+          style={{ width: `${(step / (ALL_STEPS.length - 1)) * 100}%` }}
         />
-
-        {/* Step bullets */}
         <div className="absolute inset-0 flex justify-between items-center px-0">
           {ALL_STEPS.map((_, idx) => (
             <div
@@ -372,11 +400,14 @@ export default function EmailForm({
         </div>
       </div>
 
-
       <form
         onSubmit={e => {
           e.preventDefault();
-          step === ALL_STEPS.indexOf('Review') ? handleSubmit() : nextStep();
+          if (ALL_STEPS[step] === 'Review') {
+            if (validateStep()) handleSubmit();
+          } else {
+            nextStep();
+          }
         }}
         className="space-y-6"
       >
